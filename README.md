@@ -11,9 +11,9 @@ A brick slides back and forth above your tower. Tap (or press Space) to drop it.
 - Gets harder as you climb: uneven speed, wind that turns bricks back, tighter precision
 - One-tap controls: touch, mouse or keyboard
 - Works on phones and desktops, in portrait and landscape
-- English and Uzbek (`?lang=en` / `?lang=uz`)
+- 12 languages: English, Spanish, Portuguese, French, German, Russian, Turkish, Indonesian, Hindi, Japanese, Korean, Uzbek. Inside YouTube the player's language is picked automatically; here add `?lang=es`, `?lang=ru`, `?lang=ja` and so on
 - Built for YouTube Playables: a single `index.html` with no external dependencies besides the Playables SDK
 
 ---
 
-**Oʻzbekcha:** gʻishtni oldingisining ustiga aniq tushiring. Chetga chiqqan qismi kesilib tushadi, ketma-ket 3 marta aniq tushirsangiz, gʻisht yana kengayadi. Oʻynash uchun yuqoridagi havolani oching.
+Play in your language: [Español](https://olimoverkinjon.github.io/minora/?lang=es) · [Português](https://olimoverkinjon.github.io/minora/?lang=pt) · [Français](https://olimoverkinjon.github.io/minora/?lang=fr) · [Deutsch](https://olimoverkinjon.github.io/minora/?lang=de) · [Русский](https://olimoverkinjon.github.io/minora/?lang=ru) · [Türkçe](https://olimoverkinjon.github.io/minora/?lang=tr) · [Bahasa Indonesia](https://olimoverkinjon.github.io/minora/?lang=id) · [हिन्दी](https://olimoverkinjon.github.io/minora/?lang=hi) · [日本語](https://olimoverkinjon.github.io/minora/?lang=ja) · [한국어](https://olimoverkinjon.github.io/minora/?lang=ko) · [Oʻzbekcha](https://olimoverkinjon.github.io/minora/?lang=uz)

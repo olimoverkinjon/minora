@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="uz">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -61,7 +61,7 @@ button{font-family:var(--font)}
 .stat-chip b{font-size:16px;font-weight:900;color:var(--ivory);font-variant-numeric:tabular-nums;margin-top:4px}
 .stat-chip .best svg{color:var(--gold)}
 .stat-chip .stars svg{color:var(--gold-2);filter:drop-shadow(0 0 6px rgba(246,210,122,.55))}
-.stat-chip .best b::after{content:" m";font-size:11px;font-weight:700;color:var(--muted)}
+.stat-chip .best b::after{content:var(--u," m");font-size:11px;font-weight:700;color:var(--muted)}
 .stat-chip .sep{width:1px;height:26px;background:var(--line)}
 .stat-chip .stars.bump{animation:pop .35s var(--ease)}
 .score-wrap{display:flex;flex-direction:column;align-items:center;transition:opacity .3s,transform .3s var(--ease)}
@@ -345,27 +345,27 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
 <body>
 
 <div class="stage loading newbie" id="stage" data-state="intro">
-  <canvas id="cv" role="img" aria-label="Minora oʻyin maydoni" data-i18n-aria="field"></canvas>
+  <canvas id="cv" role="img" aria-label="Minora game field" data-i18n-aria="field"></canvas>
 
   <header class="hud">
     <div class="chip stat-chip">
       <span class="sc best">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6 3h12v2h3v3.5A4.5 4.5 0 0 1 16.9 13a5.5 5.5 0 0 1-3.9 2.9V18h3.5v3h-9v-3H11v-2.1A5.5 5.5 0 0 1 7.1 13 4.5 4.5 0 0 1 3 8.5V5h3V3zm0 4H5v1.5a2.5 2.5 0 0 0 1.2 2.1A6 6 0 0 1 6 9V7zm12 0v2c0 .55-.07 1.08-.2 1.6A2.5 2.5 0 0 0 19 8.5V7h-1z"/></svg>
-        <span><small data-i18n="best">Rekord</small><b id="best">0</b></span>
+        <span><small data-i18n="best">Best</small><b id="best">0</b></span>
       </span>
       <i class="sep" aria-hidden="true"></i>
       <span class="sc stars" id="starChip">
         <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>
-        <span><small data-i18n="stars">Yulduz</small><b id="stars">0</b></span>
+        <span><small data-i18n="stars">Stars</small><b id="stars">0</b></span>
       </span>
     </div>
     <div class="score-wrap">
       <div class="score" id="score">0</div>
-      <div class="unit" data-i18n="unit">metr</div>
+      <div class="unit" data-i18n="unit">meters</div>
       <div class="streak" id="streak" aria-hidden="true"><i></i><i></i><i></i><b id="streakX"></b></div>
       <div class="pups" id="pups"></div>
     </div>
-    <button class="icon-btn" id="soundBtn" type="button" aria-label="Ovozni oʻchirish" aria-pressed="true">
+    <button class="icon-btn" id="soundBtn" type="button" aria-label="Mute" aria-pressed="true">
       <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z" fill="currentColor"/><path class="w" d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.5a8 8 0 0 1 0 11"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
     </button>
   </header>
@@ -374,66 +374,66 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
 
   <div class="tapcue" aria-hidden="true">
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0v4A6.5 6.5 0 0 1 11.5 21h-.6a6 6 0 0 1-4.6-2.2l-2.7-3.3a1.5 1.5 0 0 1 2.2-2L9 16v-5"/></svg>
-    <span data-i18n="cue">Bosing — gʻishtni tushiring</span>
+    <span data-i18n="cue">Tap to drop the brick</span>
   </div>
 
   <section class="overlay intro" id="intro">
     <div class="intro-inner">
-      <p class="eyebrow"><span class="orn"></span><span data-i18n="tagline">Gʻisht ustiga gʻisht</span><span class="orn"></span></p>
+      <p class="eyebrow"><span class="orn"></span><span data-i18n="tagline">Brick upon brick</span><span class="orn"></span></p>
       <h1 class="logo">MINORA</h1>
       <div class="orn-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       <ol class="steps">
         <li>
           <span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0v4A6.5 6.5 0 0 1 11.5 21h-.6a6 6 0 0 1-4.6-2.2l-2.7-3.3a1.5 1.5 0 0 1 2.2-2L9 16v-5"/></svg></span>
-          <b data-i18n="s1">Bosing</b><small data-i18n="s1d">Gʻisht toʻxtab, pastga tushadi</small>
+          <b data-i18n="s1">Tap</b><small data-i18n="s1d">The brick stops and drops</small>
         </li>
         <li>
           <span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 7.8 20 19M8.2 16.2 20 5"/></svg></span>
-          <b data-i18n="s2">Aniq tushiring</b><small data-i18n="s2d">Chetga chiqqan qismi kesiladi</small>
+          <b data-i18n="s2">Line it up</b><small data-i18n="s2d">Overhang gets sliced off</small>
         </li>
         <li>
           <span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
-          <b data-i18n="s3">Bonuslarni oling</b><small data-i18n="s3d">Yulduz, qalqon va boshqalar</small>
+          <b data-i18n="s3">Grab bonuses</b><small data-i18n="s3d">Stars, shields and more</small>
         </li>
       </ol>
       <div class="hub" id="hub" data-tab="missions">
         <div class="tabs" role="tablist">
-          <button type="button" role="tab" data-tab="missions" aria-selected="true"><span data-i18n="missions">Vazifalar</span><b id="tabMis">0/3</b></button>
-          <button type="button" role="tab" data-tab="skins" aria-selected="false"><span data-i18n="skins">Bezaklar</span><b id="tabSkins">1/6</b></button>
+          <button type="button" role="tab" data-tab="missions" aria-selected="true"><span data-i18n="missions">Missions</span><b id="tabMis">0/3</b></button>
+          <button type="button" role="tab" data-tab="skins" aria-selected="false"><span data-i18n="skins">Skins</span><b id="tabSkins">1/6</b></button>
         </div>
-        <section class="card pane" data-pane="missions"><h2><span data-i18n="missions">Vazifalar</span></h2><div class="mlist" id="introMissions"></div></section>
-        <section class="card pane" data-pane="skins"><h2><span data-i18n="skins">Bezaklar</span><span class="acc" id="skinName"></span></h2><div class="skins" id="skins"></div></section>
+        <section class="card pane" data-pane="missions"><h2><span data-i18n="missions">Missions</span></h2><div class="mlist" id="introMissions"></div></section>
+        <section class="card pane" data-pane="skins"><h2><span data-i18n="skins">Skins</span><span class="acc" id="skinName"></span></h2><div class="skins" id="skins"></div></section>
       </div>
       <button class="btn breathe" id="startBtn" type="button" disabled>
         <span class="spin" aria-hidden="true"></span>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L8.5 4.64A1 1 0 0 0 7 5.5z"/></svg>
-        <span class="lbl" data-i18n="play">Boshlash</span>
+        <span class="lbl" data-i18n="play">Play</span>
       </button>
-      <p class="hint" data-i18n-html="hintStart"><kbd>Probel</kbd> yoki ekranning istalgan joyiga bosing</p>
+      <p class="hint" data-i18n-html="hintStart"><kbd>Space</kbd> or tap anywhere</p>
     </div>
   </section>
 
   <section class="overlay over" id="over" hidden>
     <div class="panel" id="overPanel" role="dialog" aria-labelledby="overTitle" aria-live="polite">
-      <p class="eyebrow" id="overTitle">Minora qulab tushdi</p>
-      <div class="badges"><span class="badge" id="newRec" hidden data-i18n="newBest">★ Yangi rekord</span><span class="badge medal" id="medalBadge" hidden></span></div>
-      <div class="final"><span id="final">0</span><em>m</em></div>
+      <p class="eyebrow" id="overTitle">The tower has fallen</p>
+      <div class="badges"><span class="badge" id="newRec" hidden data-i18n="newBest">★ New best</span><span class="badge medal" id="medalBadge" hidden></span></div>
+      <div class="final"><span id="final">0</span><em data-i18n="u">m</em></div>
       <div class="goal"><div class="gl"><span id="goalLabel"></span><b id="goalNum"></b></div><div class="gb"><i id="goalBar"></i></div></div>
       <div class="stats">
-        <div><span data-i18n="best">Rekord</span><b id="statBest">0 m</b></div>
-        <div><span data-i18n="perfect">Aniq</span><b id="statPerf">0</b></div>
-        <div><span data-i18n="streak">Seriya</span><b id="statCombo">0</b></div>
-        <div><span data-i18n="stars">Yulduz</span><b id="statStars">+0</b></div>
+        <div><span data-i18n="best">Best</span><b id="statBest">0 m</b></div>
+        <div><span data-i18n="perfect">Perfect</span><b id="statPerf">0</b></div>
+        <div><span data-i18n="streak">Streak</span><b id="statCombo">0</b></div>
+        <div><span data-i18n="stars">Stars</span><b id="statStars">+0</b></div>
       </div>
       <div class="card"><div class="mlist" id="overMissions"></div></div>
       <div class="btn-row">
-        <button class="btn ghost" id="menuBtn" type="button"><span data-i18n="menu">Menyu</span></button>
+        <button class="btn ghost" id="menuBtn" type="button"><span data-i18n="menu">Menu</span></button>
         <button class="btn" id="againBtn" type="button">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v5h5"/></svg>
-          <span data-i18n="again">Yana bir bor</span>
+          <span data-i18n="again">Play again</span>
         </button>
       </div>
-      <p class="hint" data-i18n-html="hintAgain"><kbd>Probel</kbd> — qayta boshlash</p>
+      <p class="hint" data-i18n-html="hintAgain"><kbd>Space</kbd> — restart</p>
     </div>
   </section>
 </div>
@@ -457,9 +457,9 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
   const smooth = (a, b, v) => { const t = clamp((v - a)/(b - a), 0, 1); return t*t*(3 - 2*t); };
   const fmt = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k]);
 
-  // ---------- strings (English is required; Uzbek when the player's language is uz) ----------
+  // ---------- strings: English (required, and the default) + the biggest YouTube audiences; missing keys fall back to English ----------
   const STR = {
-    en: {field:"Minora game field", best:"Best", unit:"meters", cue:"Tap to drop the brick", tagline:"Brick upon brick",
+    en: {u:"m", field:"Minora game field", best:"Best", unit:"meters", cue:"Tap to drop the brick", tagline:"Brick upon brick",
       s1:"Tap", s1d:"The brick stops and drops", s2:"Line it up", s2d:"Overhang gets sliced off", s3:"Grab bonuses", s3d:"Stars, shields and more",
       play:"Play", hintStart:"<kbd>Space</kbd> or tap anywhere", newBest:"★ New best", perfect:"Perfect", streak:"Streak", stars:"Stars",
       again:"Play again", menu:"Menu", hintAgain:"<kbd>Space</kbd> — restart", mute:"Mute", unmute:"Unmute",
@@ -473,7 +473,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
       pStar:"+1 ★", pShield:"Shield!", pSlow:"Slow-mo!", pWide:"Wider!", shieldUsed:"Shield saved you!", streakBonus:"Streak bonus +{n} ★",
       medals:["Bronze","Silver","Gold","Platinum","Diamond"], medalGot:"{m} medal", next:"Next: {m} · {n} m", allMedals:"All medals earned!",
       skinNames:["Majolica","Samarkand","Bukhara","Khiva","Neon","Gilded"], owned:"Owned", selected:"Selected", unlocked:"{s} unlocked!", need:"{n} more ★ needed", slowN:"{n}"},
-    uz: {field:"Minora oʻyin maydoni", best:"Rekord", unit:"metr", cue:"Bosing — gʻishtni tushiring", tagline:"Gʻisht ustiga gʻisht",
+    uz: {u:"m", field:"Minora oʻyin maydoni", best:"Rekord", unit:"metr", cue:"Bosing — gʻishtni tushiring", tagline:"Gʻisht ustiga gʻisht",
       s1:"Bosing", s1d:"Gʻisht toʻxtab, pastga tushadi", s2:"Aniq tushiring", s2d:"Chetga chiqqan qismi kesiladi", s3:"Bonuslarni oling", s3d:"Yulduz, qalqon va boshqalar",
       play:"Boshlash", hintStart:"<kbd>Probel</kbd> yoki ekranning istalgan joyiga bosing", newBest:"★ Yangi rekord", perfect:"Aniq", streak:"Seriya", stars:"Yulduz",
       again:"Yana bir bor", menu:"Menyu", hintAgain:"<kbd>Probel</kbd> — qayta boshlash", mute:"Ovozni oʻchirish", unmute:"Ovozni yoqish",
@@ -487,15 +487,157 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
       pStar:"+1 ★", pShield:"Qalqon!", pSlow:"Sekinlashuv!", pWide:"Kengaydi!", shieldUsed:"Qalqon saqlab qoldi!", streakBonus:"Seriya bonusi +{n} ★",
       medals:["Bronza","Kumush","Oltin","Platina","Olmos"], medalGot:"{m} medal", next:"Keyingi: {m} · {n} m", allMedals:"Barcha medallar olindi!",
       skinNames:["Majolika","Samarqand","Buxoro","Xiva","Neon","Tilla"], owned:"Sizda", selected:"Tanlangan", unlocked:"{s} ochildi!", need:"Yana {n} ★ kerak", slowN:"{n}"},
+    es: {u:"m", field:"Campo de juego de Minora", best:"Récord", unit:"metros", cue:"Toca para soltar el ladrillo", tagline:"Ladrillo a ladrillo",
+      s1:"Toca", s1d:"El ladrillo se detiene y cae", s2:"Alinéalo", s2d:"Lo que sobresale se corta", s3:"Atrapa bonus", s3d:"Estrellas, escudos y más",
+      play:"Jugar", hintStart:"<kbd>Espacio</kbd> o toca en cualquier lugar", newBest:"★ Nuevo récord", perfect:"Perfectos", streak:"Racha", stars:"Estrellas",
+      again:"Otra vez", menu:"Menú", hintAgain:"<kbd>Espacio</kbd> — reiniciar", mute:"Silenciar", unmute:"Activar sonido",
+      missions:"Misiones", skins:"Aspectos",
+      p1:"¡Perfecto!", p2:"¡Genial!", pN:"¡Increíble! ×", rec:"¡Nuevo récord!", recLine:"RÉCORD",
+      overRec:"¡Nueva cima!", overShort:"Tranquilo, encuentra el ritmo", over:"La torre ha caído", near:"¡A solo {n} m de tu récord!",
+      m_height:"Llega a {n} m", m_perfect:"{n} caídas perfectas en una partida", m_streak:"Consigue una racha ×{n}", m_stars:"Reúne {n} ★ en una partida",
+      m_bricks:"Coloca {n} ladrillos en total", m_games:"Juega {n} partidas", mDone:"Misión cumplida: {t} +{r}★",
+      zones:["Amanecer","Día","Atardecer","Noche","Espacio"],
+      d1:"¡Velocidad irregular!", d2:"¡Viento! Los ladrillos pueden girar", d3:"La precisión se ajusta", d4:"Precisión experta",
+      pShield:"¡Escudo!", pSlow:"¡Cámara lenta!", pWide:"¡Más ancho!", shieldUsed:"¡El escudo te salvó!", streakBonus:"Bonus de racha +{n} ★",
+      medals:["Bronce","Plata","Oro","Platino","Diamante"], medalGot:"Medalla de {m}", next:"Siguiente: {m} · {n} m", allMedals:"¡Todas las medallas!",
+      skinNames:["Mayólica","Samarcanda","Bujará","Jiva","Neón","Dorado"], owned:"Tuyo", selected:"Elegido", unlocked:"¡{s} desbloqueado!", need:"Faltan {n} ★"},
+    pt: {u:"m", field:"Campo do jogo Minora", best:"Recorde", unit:"metros", cue:"Toque para soltar o tijolo", tagline:"Tijolo sobre tijolo",
+      s1:"Toque", s1d:"O tijolo para e cai", s2:"Alinhe", s2d:"O que sobra é cortado", s3:"Pegue bônus", s3d:"Estrelas, escudos e mais",
+      play:"Jogar", hintStart:"<kbd>Espaço</kbd> ou toque em qualquer lugar", newBest:"★ Novo recorde", perfect:"Perfeitos", streak:"Sequência", stars:"Estrelas",
+      again:"Jogar de novo", menu:"Menu", hintAgain:"<kbd>Espaço</kbd> — reiniciar", mute:"Silenciar", unmute:"Ativar som",
+      missions:"Missões", skins:"Visuais",
+      p1:"Perfeito!", p2:"Ótimo!", pN:"Incrível ×", rec:"Novo recorde!", recLine:"RECORDE",
+      overRec:"Novo pico!", overShort:"Calma, encontre o ritmo", over:"A torre caiu", near:"Só {n} m do seu recorde!",
+      m_height:"Chegue a {n} m", m_perfect:"{n} quedas perfeitas em uma partida", m_streak:"Faça uma sequência ×{n}", m_stars:"Junte {n} ★ em uma partida",
+      m_bricks:"Coloque {n} tijolos no total", m_games:"Jogue {n} partidas", mDone:"Missão cumprida: {t} +{r}★",
+      zones:["Amanhecer","Dia","Entardecer","Noite","Espaço"],
+      d1:"Velocidade irregular!", d2:"Vento! Os tijolos podem voltar", d3:"A precisão ficou mais exigente", d4:"Precisão de mestre",
+      pShield:"Escudo!", pSlow:"Câmera lenta!", pWide:"Mais largo!", shieldUsed:"O escudo te salvou!", streakBonus:"Bônus de sequência +{n} ★",
+      medals:["Bronze","Prata","Ouro","Platina","Diamante"], medalGot:"Medalha de {m}", next:"Próxima: {m} · {n} m", allMedals:"Todas as medalhas!",
+      skinNames:["Majólica","Samarcanda","Bucara","Khiva","Neon","Dourado"], owned:"Seu", selected:"Em uso", unlocked:"{s} desbloqueado!", need:"Faltam {n} ★"},
+    fr: {u:"m", field:"Zone de jeu Minora", best:"Record", unit:"mètres", cue:"Touchez pour lâcher la brique", tagline:"Brique après brique",
+      s1:"Touchez", s1d:"La brique s’arrête et tombe", s2:"Alignez", s2d:"Ce qui dépasse est coupé", s3:"Bonus", s3d:"Étoiles, boucliers et plus",
+      play:"Jouer", hintStart:"<kbd>Espace</kbd> ou touchez n’importe où", newBest:"★ Nouveau record", perfect:"Parfaits", streak:"Série", stars:"Étoiles",
+      again:"Rejouer", menu:"Menu", hintAgain:"<kbd>Espace</kbd> — rejouer", mute:"Couper le son", unmute:"Activer le son",
+      missions:"Missions", skins:"Styles",
+      p1:"Parfait !", p2:"Super !", pN:"Incroyable ×", rec:"Nouveau record !", recLine:"RECORD",
+      overRec:"Nouveau sommet !", overShort:"Doucement, trouvez le rythme", over:"La tour s’est effondrée", near:"Plus que {n} m pour votre record !",
+      m_height:"Atteignez {n} m", m_perfect:"{n} lâchers parfaits en une partie", m_streak:"Faites une série ×{n}", m_stars:"Récoltez {n} ★ en une partie",
+      m_bricks:"Posez {n} briques au total", m_games:"Jouez {n} parties", mDone:"Mission accomplie : {t} +{r}★",
+      zones:["Aube","Jour","Crépuscule","Nuit","Espace"],
+      d1:"Vitesse irrégulière !", d2:"Du vent ! Les briques peuvent faire demi-tour", d3:"La précision se resserre", d4:"Précision d’expert",
+      pShield:"Bouclier !", pSlow:"Ralenti !", pWide:"Plus large !", shieldUsed:"Le bouclier vous a sauvé !", streakBonus:"Bonus de série +{n} ★",
+      medals:["Bronze","Argent","Or","Platine","Diamant"], medalGot:"Médaille : {m}", next:"Prochaine : {m} · {n} m", allMedals:"Toutes les médailles !",
+      skinNames:["Majolique","Samarcande","Boukhara","Khiva","Néon","Doré"], owned:"Acquis", selected:"Choisi", unlocked:"{s} débloqué !", need:"Encore {n} ★"},
+    de: {u:"m", field:"Minora-Spielfeld", best:"Rekord", unit:"Meter", cue:"Tippen, um den Stein fallen zu lassen", tagline:"Stein auf Stein",
+      s1:"Tippen", s1d:"Der Stein stoppt und fällt", s2:"Genau setzen", s2d:"Überstand wird abgeschnitten", s3:"Boni sammeln", s3d:"Sterne, Schilde und mehr",
+      play:"Spielen", hintStart:"<kbd>Leertaste</kbd> oder irgendwo tippen", newBest:"★ Neuer Rekord", perfect:"Perfekt", streak:"Serie", stars:"Sterne",
+      again:"Nochmal", menu:"Menü", hintAgain:"<kbd>Leertaste</kbd> — neu starten", mute:"Stumm", unmute:"Ton an",
+      missions:"Missionen", skins:"Designs",
+      p1:"Perfekt!", p2:"Klasse!", pN:"Wahnsinn ×", rec:"Neuer Rekord!", recLine:"REKORD",
+      overRec:"Neuer Gipfel!", overShort:"Ruhig – finde den Rhythmus", over:"Der Turm ist eingestürzt", near:"Nur {n} m unter deinem Rekord!",
+      m_height:"Erreiche {n} m", m_perfect:"{n} perfekte Würfe in einem Spiel", m_streak:"Schaffe eine ×{n}-Serie", m_stars:"Sammle {n} ★ in einem Spiel",
+      m_bricks:"Setze insgesamt {n} Steine", m_games:"Spiele {n} Runden", mDone:"Mission erfüllt: {t} +{r}★",
+      zones:["Morgengrauen","Tag","Abend","Nacht","Weltall"],
+      d1:"Achtung: wechselndes Tempo!", d2:"Wind! Steine können umkehren", d3:"Die Präzision wird strenger", d4:"Profi-Präzision",
+      pShield:"Schild!", pSlow:"Zeitlupe!", pWide:"Breiter!", shieldUsed:"Der Schild hat dich gerettet!", streakBonus:"Serienbonus +{n} ★",
+      medals:["Bronze","Silber","Gold","Platin","Diamant"], medalGot:"{m}-Medaille", next:"Nächste: {m} · {n} m", allMedals:"Alle Medaillen geholt!",
+      skinNames:["Majolika","Samarkand","Buchara","Chiwa","Neon","Gold"], owned:"Gekauft", selected:"Aktiv", unlocked:"{s} freigeschaltet!", need:"Noch {n} ★ nötig"},
+    ru: {u:"м", field:"Игровое поле Minora", best:"Рекорд", unit:"метров", cue:"Нажмите, чтобы уронить кирпич", tagline:"Кирпич за кирпичом",
+      s1:"Нажмите", s1d:"Кирпич остановится и упадёт", s2:"Ставьте ровно", s2d:"Выступ отрезается", s3:"Бонусы", s3d:"Звёзды, щиты и не только",
+      play:"Играть", hintStart:"<kbd>Пробел</kbd> или нажмите в любом месте", newBest:"★ Новый рекорд", perfect:"Точно", streak:"Серия", stars:"Звёзды",
+      again:"Ещё раз", menu:"Меню", hintAgain:"<kbd>Пробел</kbd> — заново", mute:"Выключить звук", unmute:"Включить звук",
+      missions:"Задания", skins:"Облики",
+      p1:"Точно!", p2:"Отлично!", pN:"Потрясающе ×", rec:"Новый рекорд!", recLine:"РЕКОРД",
+      overRec:"Новая вершина!", overShort:"Не спешите — поймайте ритм", over:"Башня рухнула", near:"До рекорда всего {n} м!",
+      m_height:"Достигните {n} м", m_perfect:"{n} точных бросков за игру", m_streak:"Серия ×{n}", m_stars:"Соберите {n} ★ за игру",
+      m_bricks:"Положите всего {n} кирпичей", m_games:"Сыграйте {n} раз", mDone:"Задание выполнено: {t} +{r}★",
+      zones:["Рассвет","День","Закат","Ночь","Космос"],
+      d1:"Осторожно: скорость скачет!", d2:"Ветер! Кирпич может развернуться", d3:"Точность строже", d4:"Точность мастера",
+      pShield:"Щит!", pSlow:"Замедление!", pWide:"Шире!", shieldUsed:"Щит спас вас!", streakBonus:"Бонус за серию +{n} ★",
+      medals:["Бронза","Серебро","Золото","Платина","Алмаз"], medalGot:"Медаль: {m}", next:"Далее: {m} · {n} м", allMedals:"Все медали собраны!",
+      skinNames:["Майолика","Самарканд","Бухара","Хива","Неон","Золото"], owned:"Есть", selected:"Выбран", unlocked:"{s} открыт!", need:"Нужно ещё {n} ★"},
+    tr: {u:"m", field:"Minora oyun alanı", best:"Rekor", unit:"metre", cue:"Tuğlayı bırakmak için dokun", tagline:"Tuğla tuğla",
+      s1:"Dokun", s1d:"Tuğla durur ve düşer", s2:"Hizala", s2d:"Taşan kısım kesilir", s3:"Bonusları kap", s3d:"Yıldız, kalkan ve dahası",
+      play:"Oyna", hintStart:"<kbd>Boşluk</kbd> ya da herhangi bir yere dokun", newBest:"★ Yeni rekor", perfect:"Kusursuz", streak:"Seri", stars:"Yıldız",
+      again:"Tekrar oyna", menu:"Menü", hintAgain:"<kbd>Boşluk</kbd> — yeniden başla", mute:"Sesi kapat", unmute:"Sesi aç",
+      missions:"Görevler", skins:"Görünümler",
+      p1:"Kusursuz!", p2:"Harika!", pN:"Muhteşem ×", rec:"Yeni rekor!", recLine:"REKOR",
+      overRec:"Yeni zirve!", overShort:"Acele etme, ritmi yakala", over:"Kule yıkıldı", near:"Rekoruna sadece {n} m kaldı!",
+      m_height:"{n} m’ye ulaş", m_perfect:"Bir oyunda {n} kusursuz bırakış", m_streak:"×{n} seri yap", m_stars:"Bir oyunda {n} ★ topla",
+      m_bricks:"Toplam {n} tuğla koy", m_games:"{n} oyun oyna", mDone:"Görev tamam: {t} +{r}★",
+      zones:["Şafak","Gündüz","Akşam","Gece","Uzay"],
+      d1:"Dikkat: hız değişken!", d2:"Rüzgâr! Tuğlalar geri dönebilir", d3:"Hassasiyet artıyor", d4:"Usta hassasiyeti",
+      pShield:"Kalkan!", pSlow:"Ağır çekim!", pWide:"Genişledi!", shieldUsed:"Kalkan seni kurtardı!", streakBonus:"Seri bonusu +{n} ★",
+      medals:["Bronz","Gümüş","Altın","Platin","Elmas"], medalGot:"{m} madalya", next:"Sıradaki: {m} · {n} m", allMedals:"Tüm madalyalar alındı!",
+      skinNames:["Çini","Semerkant","Buhara","Hive","Neon","Altın"], owned:"Sende", selected:"Seçili", unlocked:"{s} açıldı!", need:"{n} ★ daha gerekli"},
+    id: {u:"m", field:"Area permainan Minora", best:"Rekor", unit:"meter", cue:"Ketuk untuk menjatuhkan bata", tagline:"Bata demi bata",
+      s1:"Ketuk", s1d:"Bata berhenti lalu jatuh", s2:"Sejajarkan", s2d:"Bagian yang menjorok terpotong", s3:"Ambil bonus", s3d:"Bintang, perisai, dan lainnya",
+      play:"Main", hintStart:"<kbd>Spasi</kbd> atau ketuk di mana saja", newBest:"★ Rekor baru", perfect:"Sempurna", streak:"Beruntun", stars:"Bintang",
+      again:"Main lagi", menu:"Menu", hintAgain:"<kbd>Spasi</kbd> — ulangi", mute:"Bisukan", unmute:"Nyalakan suara",
+      missions:"Misi", skins:"Tampilan",
+      p1:"Sempurna!", p2:"Hebat!", pN:"Luar biasa ×", rec:"Rekor baru!", recLine:"REKOR",
+      overRec:"Puncak baru!", overShort:"Santai, temukan ritmenya", over:"Menaranya runtuh", near:"Tinggal {n} m lagi dari rekormu!",
+      m_height:"Capai {n} m", m_perfect:"{n} jatuhan sempurna dalam satu permainan", m_streak:"Raih beruntun ×{n}", m_stars:"Kumpulkan {n} ★ dalam satu permainan",
+      m_bricks:"Pasang total {n} bata", m_games:"Main {n} kali", mDone:"Misi selesai: {t} +{r}★",
+      zones:["Fajar","Siang","Senja","Malam","Angkasa"],
+      d1:"Awas: kecepatan berubah-ubah!", d2:"Angin! Bata bisa berbalik", d3:"Presisi makin ketat", d4:"Presisi ahli",
+      pShield:"Perisai!", pSlow:"Gerak lambat!", pWide:"Lebih lebar!", shieldUsed:"Perisai menyelamatkanmu!", streakBonus:"Bonus beruntun +{n} ★",
+      medals:["Perunggu","Perak","Emas","Platinum","Berlian"], medalGot:"Medali {m}", next:"Berikutnya: {m} · {n} m", allMedals:"Semua medali didapat!",
+      skinNames:["Majolika","Samarkand","Bukhara","Khiva","Neon","Emas"], owned:"Dimiliki", selected:"Dipakai", unlocked:"{s} terbuka!", need:"Butuh {n} ★ lagi"},
+    hi: {u:"m", field:"Minora खेल क्षेत्र", best:"रिकॉर्ड", unit:"मीटर", cue:"ईंट गिराने के लिए टैप करें", tagline:"ईंट पर ईंट",
+      s1:"टैप करें", s1d:"ईंट रुककर गिरती है", s2:"सीध में रखें", s2d:"बाहर निकला हिस्सा कट जाता है", s3:"बोनस लें", s3d:"सितारे, ढाल और बहुत कुछ",
+      play:"खेलें", hintStart:"<kbd>स्पेस</kbd> या कहीं भी टैप करें", newBest:"★ नया रिकॉर्ड", perfect:"परफ़ेक्ट", streak:"लगातार", stars:"सितारे",
+      again:"फिर से खेलें", menu:"मेन्यू", hintAgain:"<kbd>स्पेस</kbd> — फिर शुरू करें", mute:"म्यूट करें", unmute:"आवाज़ चालू करें",
+      missions:"मिशन", skins:"स्किन",
+      p1:"परफ़ेक्ट!", p2:"बढ़िया!", pN:"कमाल ×", rec:"नया रिकॉर्ड!", recLine:"रिकॉर्ड",
+      overRec:"नई ऊँचाई!", overShort:"धीरे-धीरे, लय पकड़ें", over:"मीनार गिर गई", near:"रिकॉर्ड से बस {n} m पीछे!",
+      m_height:"{n} m तक पहुँचें", m_perfect:"एक गेम में {n} परफ़ेक्ट ड्रॉप", m_streak:"×{n} लगातार परफ़ेक्ट", m_stars:"एक गेम में {n} ★ जमा करें",
+      m_bricks:"कुल {n} ईंटें रखें", m_games:"{n} गेम खेलें", mDone:"मिशन पूरा: {t} +{r}★",
+      zones:["सुबह","दिन","शाम","रात","अंतरिक्ष"],
+      d1:"सावधान: रफ़्तार बदलती है!", d2:"हवा! ईंट वापस मुड़ सकती है", d3:"सटीकता और सख़्त", d4:"उस्ताद सटीकता",
+      pShield:"ढाल!", pSlow:"स्लो-मो!", pWide:"चौड़ी!", shieldUsed:"ढाल ने बचा लिया!", streakBonus:"लगातार बोनस +{n} ★",
+      medals:["कांस्य","रजत","स्वर्ण","प्लैटिनम","हीरा"], medalGot:"{m} पदक", next:"अगला: {m} · {n} m", allMedals:"सभी पदक मिल गए!",
+      skinNames:["मजोलिका","समरकंद","बुख़ारा","ख़ीवा","नियॉन","सुनहरा"], owned:"आपका", selected:"चुना गया", unlocked:"{s} अनलॉक!", need:"{n} ★ और चाहिए"},
+    ja: {u:"m", field:"Minora ゲーム画面", best:"ベスト", unit:"メートル", cue:"タップでレンガを落とす", tagline:"レンガを積み上げろ",
+      s1:"タップ", s1d:"レンガが止まって落ちる", s2:"ぴったり重ねる", s2d:"はみ出た部分は切れる", s3:"ボーナス", s3d:"スター、シールドなど",
+      play:"プレイ", hintStart:"<kbd>スペース</kbd>または画面をタップ", newBest:"★ ベスト更新", perfect:"パーフェクト", streak:"連続", stars:"スター",
+      again:"もう一度", menu:"メニュー", hintAgain:"<kbd>スペース</kbd> — リスタート", mute:"ミュート", unmute:"ミュート解除",
+      missions:"ミッション", skins:"スキン",
+      p1:"パーフェクト！", p2:"グレート！", pN:"すごい ×", rec:"ベスト更新！", recLine:"ベスト",
+      overRec:"新記録！", overShort:"落ち着いてリズムをつかもう", over:"塔が崩れた", near:"ベストまであと {n} m！",
+      m_height:"{n} m に到達", m_perfect:"1回で {n} 回パーフェクト", m_streak:"×{n} 連続を達成", m_stars:"1回で ★ を {n} 個集める",
+      m_bricks:"合計 {n} 個のレンガを積む", m_games:"{n} 回プレイ", mDone:"ミッション達成：{t} +{r}★",
+      zones:["夜明け","昼","夕暮れ","夜","宇宙"],
+      d1:"注意：スピードが変化！", d2:"風！レンガが引き返すかも", d3:"判定が厳しくなった", d4:"達人レベルの判定",
+      pShield:"シールド！", pSlow:"スローモーション！", pWide:"ワイド！", shieldUsed:"シールドが守った！", streakBonus:"連続ボーナス +{n} ★",
+      medals:["ブロンズ","シルバー","ゴールド","プラチナ","ダイヤ"], medalGot:"{m}メダル", next:"次：{m} · {n} m", allMedals:"全メダル獲得！",
+      skinNames:["マヨリカ","サマルカンド","ブハラ","ヒヴァ","ネオン","ゴールド"], owned:"所持", selected:"使用中", unlocked:"{s} 解放！", need:"あと ★{n} 必要"},
+    ko: {u:"m", field:"Minora 게임 화면", best:"최고", unit:"미터", cue:"탭해서 벽돌 떨어뜨리기", tagline:"벽돌 위에 벽돌",
+      s1:"탭", s1d:"벽돌이 멈추고 떨어져요", s2:"정확히 맞추기", s2d:"튀어나온 부분은 잘려요", s3:"보너스 획득", s3d:"별, 방패 등",
+      play:"플레이", hintStart:"<kbd>스페이스</kbd> 또는 아무 곳이나 탭", newBest:"★ 최고 기록", perfect:"퍼펙트", streak:"연속", stars:"별",
+      again:"다시 하기", menu:"메뉴", hintAgain:"<kbd>스페이스</kbd> — 다시 시작", mute:"음소거", unmute:"소리 켜기",
+      missions:"미션", skins:"스킨",
+      p1:"퍼펙트!", p2:"굿!", pN:"놀라워요 ×", rec:"최고 기록!", recLine:"최고",
+      overRec:"새로운 정상!", overShort:"천천히, 리듬을 찾아보세요", over:"탑이 무너졌어요", near:"최고 기록까지 겨우 {n} m!",
+      m_height:"{n} m 도달", m_perfect:"한 판에 퍼펙트 {n}번", m_streak:"×{n} 연속 달성", m_stars:"한 판에 ★ {n}개 모으기",
+      m_bricks:"벽돌 총 {n}개 쌓기", m_games:"{n}판 플레이", mDone:"미션 완료: {t} +{r}★",
+      zones:["새벽","낮","황혼","밤","우주"],
+      d1:"주의: 속도가 들쭉날쭉!", d2:"바람! 벽돌이 되돌아갈 수 있어요", d3:"판정이 더 엄격해졌어요", d4:"달인 판정",
+      pShield:"방패!", pSlow:"슬로 모션!", pWide:"넓게!", shieldUsed:"방패가 막아줬어요!", streakBonus:"연속 보너스 +{n} ★",
+      medals:["브론즈","실버","골드","플래티넘","다이아"], medalGot:"{m} 메달", next:"다음: {m} · {n} m", allMedals:"모든 메달 획득!",
+      skinNames:["마욜리카","사마르칸트","부하라","히바","네온","골드"], owned:"보유", selected:"사용 중", unlocked:"{s} 잠금 해제!", need:"★ {n}개 더 필요"},
   };
-  let T = STR.uz;
+  for (const k in STR) if (k !== "en") STR[k] = {...STR.en, ...STR[k]};
+  let T = STR.en;
   async function pickLang(){
     let tag = "";
     try {
       if (YT) tag = await YT.system.getLanguage();
-      else tag = new URLSearchParams(location.search).get("lang") || "uz"; // local testing: ?lang=en
+      else tag = new URLSearchParams(location.search).get("lang") || ""; // outside YouTube: English unless ?lang=xx
     } catch (e) {}
-    return /^uz/i.test(tag || "") ? "uz" : "en";
+    const code = String(tag || "en").toLowerCase().split(/[-_]/)[0];
+    return STR[code] ? code : "en";
   }
   function applyLang(lang){
     T = STR[lang];
@@ -505,6 +647,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
     document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", T[el.dataset.i18nAria]); });
     soundBtn.setAttribute("aria-label", audioOn ? T.mute : T.unmute);
     starChip.setAttribute("aria-label", T.stars);
+    stage.style.setProperty("--u", JSON.stringify(" " + T.u));
   }
 
   // ---------- palettes: base, milestone and skin tiles (majolica) ----------
@@ -831,7 +974,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
     updateStreak();
     if (!cueDone) { cueDone = true; stage.classList.remove("cue"); }
     if (score % 10 === 0) {
-      fx.push({k:"txt", lv, s: score + " m", t:0, c:"#55d3cb", big:true, off:2});
+      fx.push({k:"txt", lv, s: score + " " + T.u, t:0, c:"#55d3cb", big:true, off:2});
       burst(stack[stack.length-1].x, stack[stack.length-1].w, lv, 34, "confetti");
       if (!reduceMotion) flashScr = 1;
       sound("milestone");
@@ -843,7 +986,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
       sound("record");
     }
     const z = zoneOf(score);
-    if (z > lastZone) { lastZone = z; toast(fmt("{z} · {n} m", {z:T.zones[z], n:ZONE_M[z]}), "turq"); sound("zone"); }
+    if (z > lastZone) { lastZone = z; toast(fmt("{z} · {n} {u}", {z:T.zones[z], n:ZONE_M[z], u:T.u}), "turq"); sound("zone"); }
     while (warned < DIFF.length && score >= DIFF[warned][0]) { toast(T[DIFF[warned][1]], "warn"); sound("warn"); warned++; }
     checkMissions();
     spawn();
@@ -981,7 +1124,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
     save();
     try { if (YT) YT.engagement.sendScore({value: score}); } catch (e) {}
     $("final").textContent = score;
-    $("statBest").textContent = S.best + " m";
+    $("statBest").textContent = S.best + " " + T.u;
     $("statPerf").textContent = perfects;
     $("statCombo").textContent = maxCombo ? "×" + maxCombo : "0";
     $("statStars").textContent = "+" + runEarned;
@@ -992,7 +1135,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
     const gap = prevBest - score;
     $("overTitle").textContent = isRecord && score > 0 ? T.overRec : (gap > 0 && gap <= 3 ? fmt(T.near, {n:gap}) : (score < 5 ? T.overShort : T.over));
     const ti = TIERS.findIndex(t => t > score), bar = $("goalBar");
-    if (ti < 0) { $("goalLabel").textContent = T.allMedals; $("goalNum").textContent = score + " m"; }
+    if (ti < 0) { $("goalLabel").textContent = T.allMedals; $("goalNum").textContent = score + " " + T.u; }
     else { $("goalLabel").textContent = fmt(T.next, {m:T.medals[ti], n:TIERS[ti]}); $("goalNum").textContent = score + "/" + TIERS[ti]; }
     bar.style.transition = "none"; bar.style.width = "0";
     renderMissions($("overMissions"));
@@ -1352,7 +1495,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
         if (syy < 70) break;
         ctx.globalAlpha = .4*clamp((syy - 80)/60, 0, 1);
         ctx.fillRect(rx, y, k % 10 ? 6 : 12, 1);
-        if (k % 10 === 0) ctx.fillText(k + " m", rx + 17, y);
+        if (k % 10 === 0) ctx.fillText(k + " " + T.u, rx + 17, y);
       }
       ctx.globalAlpha = 1;
     }
@@ -1365,7 +1508,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
         ctx.globalAlpha = passed ? .35 : .8;
         ctx.strokeStyle = passed ? "#55d3cb" : "#f6d27a"; ctx.lineWidth = 1.5; ctx.setLineDash([6, 6]);
         ctx.beginPath(); ctx.moveTo(left, y + .5); ctx.lineTo(right, y + .5); ctx.stroke(); ctx.setLineDash([]);
-        const label = T.recLine + " · " + bestStart + " m";
+        const label = T.recLine + " · " + bestStart + " " + T.u;
         ctx.font = "900 10px " + FONT; ctx.textBaseline = "middle";
         const tw = ctx.measureText(label).width, px = W - tw - 30, py = y - 10;
         ctx.fillStyle = passed ? "#55d3cb" : "#f6d27a";
