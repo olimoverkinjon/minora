@@ -22,7 +22,7 @@
   --ivory:#f4efe2;
   --muted:rgba(244,239,226,.62);
   --line:rgba(244,239,226,.12);
-  --glass:rgba(10,16,48,.72);
+  --glass:rgba(11,17,50,.9);
   --font:ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
   --ease:cubic-bezier(.2,.8,.2,1);
   --sat:env(safe-area-inset-top,0px);
@@ -41,27 +41,29 @@ svg{flex:none}
 button{font-family:var(--font)}
 
 /* until save + language are loaded only the logo and a spinner show (firstFrameReady → gameReady) */
-.stage.loading .hud,.stage.loading .intro .eyebrow,.stage.loading .steps,.stage.loading .meta,.stage.loading .intro .hint{visibility:hidden}
+.stage.loading .hud,.stage.loading .intro .eyebrow,.stage.loading .steps,.stage.loading .hub,.stage.loading .intro .hint{visibility:hidden}
 .stage.loading .btn .lbl,.stage.loading .btn svg{display:none}
 .spin{display:none;width:20px;height:20px;border-radius:50%;border:3px solid rgba(42,26,2,.25);border-top-color:#2a1a02;animation:spin .8s linear infinite}
 .stage.loading .spin{display:block}
 .btn:disabled{cursor:default;animation:none}
 .stage.paused *,.stage.paused *::before,.stage.paused *::after{animation-play-state:paused!important}
 /* first-time players see the how-to; returning players see missions and skins */
-.stage.newbie .meta,.stage:not(.newbie) .steps{display:none}
+.stage.newbie .hub,.stage:not(.newbie) .steps{display:none}
 
 /* ---------- HUD ---------- */
 .hud{position:absolute;inset:0 0 auto;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:8px;
   padding:max(12px,var(--sat)) max(14px,var(--sar)) 0 max(14px,var(--sal));pointer-events:none}
-.hud-left{justify-self:start;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 11px;border-radius:999px;background:rgba(7,11,34,.55);border:1px solid var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.best-chip{color:var(--gold)}
-.best-chip span{display:flex;flex-direction:column;line-height:1}
-.best-chip small{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.best-chip b{font-size:16px;font-weight:900;color:var(--ivory);font-variant-numeric:tabular-nums;margin-top:3px}
-.best-chip b::after{content:" m";font-size:11px;font-weight:700;color:var(--muted)}
-.star-chip{height:30px;gap:6px;padding:0 12px 0 9px;color:var(--gold-2);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums}
-.star-chip.bump{animation:pop .3s var(--ease)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 11px;border-radius:999px;background:rgba(7,11,34,.55);border:1px solid var(--line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.stat-chip{justify-self:start;height:50px;padding:0 4px;gap:0;border-radius:18px;background:linear-gradient(180deg,rgba(20,28,72,.8),rgba(7,11,34,.8));box-shadow:0 10px 26px rgba(2,4,20,.3),inset 0 1px 0 rgba(255,255,255,.06)}
+.stat-chip .sc{display:flex;align-items:center;gap:8px;padding:0 11px}
+.stat-chip .sc > span{display:flex;flex-direction:column;line-height:1}
+.stat-chip small{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.stat-chip b{font-size:16px;font-weight:900;color:var(--ivory);font-variant-numeric:tabular-nums;margin-top:4px}
+.stat-chip .best svg{color:var(--gold)}
+.stat-chip .stars svg{color:var(--gold-2);filter:drop-shadow(0 0 6px rgba(246,210,122,.55))}
+.stat-chip .best b::after{content:" m";font-size:11px;font-weight:700;color:var(--muted)}
+.stat-chip .sep{width:1px;height:26px;background:var(--line)}
+.stat-chip .stars.bump{animation:pop .35s var(--ease)}
 .score-wrap{display:flex;flex-direction:column;align-items:center;transition:opacity .3s,transform .3s var(--ease)}
 .score{font-weight:900;font-size:clamp(34px,min(12vw,12vh),76px);line-height:.95;font-variant-numeric:tabular-nums;letter-spacing:-.02em;
   text-shadow:0 3px 0 rgba(7,11,34,.7),0 0 18px rgba(7,11,34,.45)}
@@ -122,37 +124,72 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
 .btn:focus-visible,.icon-btn:focus-visible,.skin:focus-visible{outline:3px solid var(--turq-2);outline-offset:3px}
 .btn.breathe{animation:breathe 2.4s ease-in-out infinite}
 
-/* cards: missions, skins */
-.card{width:100%;padding:12px 14px;border-radius:18px;background:rgba(12,18,52,.62);border:1px solid var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-align:left;cursor:default}
+/* hub: missions + skins (tabs on narrow screens, two columns on wide ones) */
+.card{width:100%;padding:14px 16px;border-radius:22px;text-align:left;cursor:default;
+  background:linear-gradient(180deg,rgba(26,34,86,.88),rgba(11,16,48,.92));border:1px solid rgba(244,239,226,.09);
+  box-shadow:0 24px 60px rgba(2,4,20,.42),inset 0 1px 0 rgba(255,255,255,.06);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}
 .card h2{margin:0 0 6px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:10.5px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.card h2 .acc{letter-spacing:.04em;text-transform:none;font-size:12px;color:var(--gold-2)}
-.mission{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px 10px;padding:7px 0}
-.mission + .mission{border-top:1px solid rgba(244,239,226,.07)}
-.mission .mt{font-size:13px;font-weight:700;line-height:1.25}
-.mission .mp{margin-left:6px;font-size:11px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.mission .mr{font-size:12px;font-weight:900;color:var(--gold-2);white-space:nowrap}
-.mission .bar{grid-column:1/-1;height:5px;border-radius:3px;background:rgba(244,239,226,.09);overflow:hidden}
-.mission .bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--turq),var(--turq-2));transition:width .6s var(--ease)}
-.mission.done .mt{color:var(--turq-2)}
-.mission.done .mt::before{content:"✓ ";font-weight:900}
+.card h2 .acc{letter-spacing:.02em;text-transform:none;font-size:12px;color:var(--gold-2)}
+.hub{display:flex;flex-direction:column;gap:8px;width:100%}
+.tabs{display:flex;gap:4px;padding:4px;border-radius:16px;background:rgba(7,11,34,.78);border:1px solid var(--line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.tabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:40px;border:0;border-radius:12px;background:none;color:var(--muted);
+  font-size:13px;font-weight:800;cursor:pointer;transition:background .25s var(--ease),color .25s,box-shadow .25s}
+.tabs button[aria-selected="true"]{background:linear-gradient(180deg,rgba(244,239,226,.14),rgba(244,239,226,.07));color:var(--ivory);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.tabs b{min-width:22px;padding:2px 7px;border-radius:999px;background:rgba(230,180,80,.14);color:var(--gold-2);font-size:11px;font-variant-numeric:tabular-nums}
+.hub .pane{animation:paneIn .35s var(--ease) both}
+.hub .pane h2{display:none}
+.hub[data-tab="missions"] [data-pane="skins"],.hub[data-tab="skins"] [data-pane="missions"]{display:none}
+.mlist{display:flex;flex-direction:column}
+.mission{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:9px 0}
+.mission + .mission{border-top:1px solid rgba(244,239,226,.06)}
+.mission .mi{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:var(--c);background:var(--cb);transition:background .3s,color .3s}
+.mission .mb{min-width:0}
+.mission .mt{font-size:13px;font-weight:700;line-height:1.25;margin-bottom:7px}
+.mission .bar{height:6px;border-radius:3px;background:rgba(244,239,226,.08);overflow:hidden}
+.mission .bar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--turq),var(--turq-2));transition:width .9s var(--ease)}
+.mission .ms{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.mission .mp{font-size:11px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mission .mr{padding:3px 8px;border-radius:999px;background:rgba(230,180,80,.13);font-size:11.5px;font-weight:900;color:var(--gold-2);white-space:nowrap}
+.mission.done .mi{--c:#2a1a02;--cb:linear-gradient(180deg,var(--gold-2),var(--gold))}
+.mission.done .mt{color:var(--gold-2)}
 .mission.done .bar i{background:linear-gradient(90deg,var(--gold),var(--gold-2))}
-.skins{display:flex;gap:10px;justify-content:space-between;padding:4px 0 8px}
-.skin{position:relative;flex:1;max-width:52px;aspect-ratio:1;border-radius:12px;border:2px solid transparent;padding:0;cursor:pointer;background:none;transition:transform .12s}
-.skin .sw{position:absolute;inset:2px;border-radius:9px;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
-.skin:hover{transform:translateY(-2px)}
-.skin[aria-pressed="true"]{border-color:var(--gold-2);box-shadow:0 0 0 3px rgba(246,210,122,.22)}
-.skin.locked .sw{filter:saturate(.3) brightness(.55)}
-.skin .price{position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:1px 6px;border-radius:999px;background:#0b1130;border:1px solid var(--line);
-  font-size:10px;font-weight:900;line-height:1.4;color:var(--gold-2);white-space:nowrap}
-.skin .price.can{background:var(--gold);color:#2a1a02;border-color:var(--gold)}
+.mission.done .mr{background:var(--gold);color:#2a1a02}
+.skins{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:2px}
+.skin{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 6px 9px;border-radius:15px;cursor:pointer;color:var(--ivory);
+  background:rgba(244,239,226,.04);border:1.5px solid rgba(244,239,226,.08);transition:transform .22s var(--ease),border-color .22s,background .22s,box-shadow .22s}
+.skin:hover{transform:translateY(-3px);background:rgba(244,239,226,.07)}
+.skin:active{transform:translateY(0) scale(.97)}
+.skin.sel{border-color:var(--gold-2);background:rgba(246,210,122,.08);box-shadow:0 0 0 3px rgba(246,210,122,.16),0 10px 24px rgba(230,180,80,.15)}
+.skin .pv{position:relative;width:100%;height:50px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:4px;border-radius:10px;
+  background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(246,210,122,.12),transparent 70%),rgba(2,4,20,.28);overflow:hidden}
+.skin .pv i{display:block;height:12px;border-radius:2px;
+  background:radial-gradient(circle,var(--m) 0 1.7px,transparent 2.2px) 0 50%/9px 100% repeat-x,linear-gradient(180deg,var(--l) 0 2px,var(--f) 2px calc(100% - 2px),var(--d) calc(100% - 2px))}
+.skin .pv i:nth-child(1){width:52%}
+.skin .pv i:nth-child(2){width:66%}
+.skin .pv i:nth-child(3){width:80%}
+.skin .lock{position:absolute;inset:0;display:grid;place-items:center;background:rgba(7,11,34,.42);color:rgba(244,239,226,.9)}
+.skin.locked .pv i{filter:saturate(.7) brightness(.8)}
+.skin .nm{font-size:12px;font-weight:800;line-height:1}
+.skin .tag{padding:3px 8px;border-radius:999px;font-size:10.5px;font-weight:900;line-height:1.2;background:rgba(244,239,226,.07);color:var(--muted);white-space:nowrap}
+.skin.locked .tag{color:var(--gold-2)}
+.skin.can .tag{background:linear-gradient(180deg,var(--gold-2),var(--gold));color:#2a1a02;box-shadow:0 0 14px rgba(230,180,80,.35)}
+.skin.sel .tag{background:rgba(85,211,203,.16);color:var(--turq-2)}
 .skin.nope{animation:nope .35s}
 
 /* intro */
 .intro{justify-content:center;padding-top:max(84px,calc(var(--sat) + 72px));padding-bottom:124px;
-  background:radial-gradient(ellipse 78% 60% at 50% 44%,rgba(7,11,34,.8) 0%,rgba(7,11,34,.35) 60%,rgba(7,11,34,0) 86%);transition:opacity .28s}
+  background:radial-gradient(ellipse 78% 62% at 50% 46%,rgba(7,11,34,.82) 0%,rgba(7,11,34,.38) 60%,rgba(7,11,34,0) 88%);transition:opacity .35s var(--ease)}
 .intro.leaving{opacity:0;pointer-events:none}
-.intro-inner{display:flex;flex-direction:column;align-items:center;gap:14px;width:min(470px,100%);text-align:center;animation:rise .7s var(--ease) both}
-.logo{margin:0;font-weight:900;font-size:clamp(54px,15.5vw,100px);line-height:.95;letter-spacing:.07em;margin-right:-.07em;
+.intro-inner{display:flex;flex-direction:column;align-items:center;gap:14px;width:min(470px,100%);text-align:center;transition:transform .35s var(--ease),filter .35s}
+.intro.leaving .intro-inner{transform:translateY(-14px) scale(.97);filter:blur(3px)}
+/* staggered entrance */
+.intro-inner > *{animation:rise .7s var(--ease) both}
+.intro-inner > :nth-child(2){animation-delay:.06s}
+.intro-inner > :nth-child(3){animation-delay:.12s}
+.intro-inner > :nth-child(4),.intro-inner > :nth-child(5){animation-delay:.18s}
+.intro-inner > :nth-child(6){animation-delay:.26s}
+.intro-inner > :nth-child(7){animation-delay:.32s}
+.logo{margin:0;font-weight:900;font-size:clamp(54px,min(15.5vw,12.5vh),118px);line-height:.95;letter-spacing:.07em;margin-right:-.07em;
   background:linear-gradient(180deg,#fff3cc 0%,var(--gold-2) 34%,var(--gold) 62%,#b07d22 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 5px 0 #5e3f10) drop-shadow(0 16px 30px rgba(0,0,0,.55))}
 .orn-row{display:flex;gap:9px;margin-top:-4px}
@@ -168,13 +205,19 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
 .steps li:nth-child(3) .ico{background:rgba(230,180,80,.16);color:var(--gold-2)}
 .steps b{font-size:13px;font-weight:900;line-height:1.15}
 .steps small{font-size:11.5px;line-height:1.35;color:var(--muted)}
-.meta{display:flex;flex-direction:column;gap:10px;width:100%}
 
 /* game over */
 .over{justify-content:flex-end;background:linear-gradient(to top,rgba(5,8,26,.92) 0%,rgba(5,8,26,.55) 40%,rgba(5,8,26,0) 64%);animation:fade .5s .2s both}
 .panel{position:relative;width:min(430px,100%);display:flex;flex-direction:column;align-items:center;gap:11px;padding:26px 18px 16px;border-radius:26px;text-align:center;cursor:default;
   background:var(--glass);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px) saturate(1.25);backdrop-filter:blur(16px) saturate(1.25);
   box-shadow:0 30px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden;animation:rise .55s var(--ease) .65s both}
+.panel > *{animation:rise .5s var(--ease) both}
+.panel > :nth-child(1),.panel > :nth-child(2){animation-delay:.75s}
+.panel > :nth-child(3){animation-delay:.8s}
+.panel > :nth-child(4){animation-delay:.86s}
+.panel > :nth-child(5){animation-delay:.92s}
+.panel > :nth-child(6){animation-delay:.98s}
+.panel > :nth-child(n+7){animation-delay:1.04s}
 .panel::before{content:"";position:absolute;inset:0 0 auto;height:5px;
   background:repeating-linear-gradient(90deg,var(--lapis) 0 18px,var(--turq) 18px 36px,var(--ivory) 36px 54px,var(--gold) 54px 72px)}
 .badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
@@ -196,7 +239,9 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
 .stats b{font-size:18px;font-weight:900;font-variant-numeric:tabular-nums}
 .stats div:first-child b,.stats div:last-child b{color:var(--gold-2)}
 .over .card{padding:8px 12px}
-.over .mission{padding:5px 0}
+.over .mission{padding:6px 0;gap:10px}
+.over .mission .mi{width:30px;height:30px;border-radius:9px}
+.over .mission .mt{margin-bottom:5px}
 .btn-row{display:flex;gap:8px;width:100%}
 .btn-row .btn{white-space:nowrap;padding:0 18px}
 .btn-row .btn:last-child{flex:1}
@@ -208,11 +253,16 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
   .panel{width:min(410px,48vw)}
 }
 @media (min-aspect-ratio:4/3) and (min-width:760px){
-  .intro-inner{width:min(720px,100%)}
-  .intro .meta{flex-direction:row;align-items:stretch}
-  .intro .meta .card{flex:1}
+  .intro-inner{width:min(780px,100%)}
+  .hub{display:grid;grid-template-columns:1fr 1.05fr;gap:12px;align-items:stretch}
+  .hub .tabs{display:none}
+  .hub .pane{display:block!important}
+  .hub .pane h2{display:flex}
+  .hub .mlist{height:calc(100% - 22px);justify-content:space-around}
   .steps{width:min(470px,100%)}
 }
+/* big desktop screens: scale the title screen up so it doesn't float in empty space */
+@media (min-width:1500px) and (min-height:900px){.intro-inner{zoom:1.18}}
 @media (pointer:coarse){.over .hint{display:none}}
 @media (max-height:720px){
   .over .hint{display:none}
@@ -227,12 +277,16 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
   .steps li{padding:10px 6px 9px;gap:4px}
   .steps .ico{width:32px;height:32px;border-radius:10px}
   .steps small{display:none}
-  .card{padding:9px 12px}
-  .mission{padding:4px 0;gap:3px 10px}
+  .card{padding:10px 12px}
+  .mission{padding:5px 0;gap:10px}
+  .mission .mi{width:30px;height:30px}
+  .mission .mt{margin-bottom:5px}
+  .skin{padding:6px 5px 7px;gap:5px}
+  .skin .pv{height:40px}
   .over .card{display:none}
 }
 @media (max-height:540px){
-  .intro .missions-card{display:none}
+  .intro .hub{display:none}
   .goal{display:none}
 }
 /* very short screens (landscape phones, 21:9 / 32:9) */
@@ -240,14 +294,15 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
   .hud{padding-top:max(8px,var(--sat))}
   .chip,.icon-btn{height:38px}
   .icon-btn{width:38px}
-  .star-chip{height:26px}
+  .stat-chip{height:42px}
+  .stat-chip b{font-size:14px}
   .unit{display:none}
   .streak{margin-top:2px}
   .toasts{top:calc(max(8px,var(--sat)) + 100px)}
   .intro{padding-top:max(52px,calc(var(--sat) + 44px));padding-bottom:84px}
   .intro-inner{gap:8px}
   .logo{font-size:clamp(34px,13vh,56px)}
-  .intro .meta{display:none!important}
+  .intro .hub{display:none!important}
   .steps{gap:6px}
   .steps li{flex-direction:row;justify-content:center;padding:6px 8px;gap:8px}
   .steps .ico{width:26px;height:26px;border-radius:8px}
@@ -279,6 +334,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes tap{0%,100%{transform:translateY(0)}50%{transform:translateY(3px) scale(.92)}}
 @keyframes toast{0%{opacity:0;transform:translateY(-8px) scale(.96)}10%,82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes nope{20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.01ms!important}
@@ -292,15 +348,16 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
   <canvas id="cv" role="img" aria-label="Minora oʻyin maydoni" data-i18n-aria="field"></canvas>
 
   <header class="hud">
-    <div class="hud-left">
-      <div class="chip best-chip">
+    <div class="chip stat-chip">
+      <span class="sc best">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6 3h12v2h3v3.5A4.5 4.5 0 0 1 16.9 13a5.5 5.5 0 0 1-3.9 2.9V18h3.5v3h-9v-3H11v-2.1A5.5 5.5 0 0 1 7.1 13 4.5 4.5 0 0 1 3 8.5V5h3V3zm0 4H5v1.5a2.5 2.5 0 0 0 1.2 2.1A6 6 0 0 1 6 9V7zm12 0v2c0 .55-.07 1.08-.2 1.6A2.5 2.5 0 0 0 19 8.5V7h-1z"/></svg>
         <span><small data-i18n="best">Rekord</small><b id="best">0</b></span>
-      </div>
-      <div class="chip star-chip" id="starChip">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>
-        <span id="stars">0</span>
-      </div>
+      </span>
+      <i class="sep" aria-hidden="true"></i>
+      <span class="sc stars" id="starChip">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>
+        <span><small data-i18n="stars">Yulduz</small><b id="stars">0</b></span>
+      </span>
     </div>
     <div class="score-wrap">
       <div class="score" id="score">0</div>
@@ -339,9 +396,13 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
           <b data-i18n="s3">Bonuslarni oling</b><small data-i18n="s3d">Yulduz, qalqon va boshqalar</small>
         </li>
       </ol>
-      <div class="meta">
-        <div class="card missions-card"><h2><span data-i18n="missions">Vazifalar</span></h2><div id="introMissions"></div></div>
-        <div class="card skins-card"><h2><span data-i18n="skins">Bezaklar</span><span class="acc" id="skinName"></span></h2><div class="skins" id="skins"></div></div>
+      <div class="hub" id="hub" data-tab="missions">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" data-tab="missions" aria-selected="true"><span data-i18n="missions">Vazifalar</span><b id="tabMis">0/3</b></button>
+          <button type="button" role="tab" data-tab="skins" aria-selected="false"><span data-i18n="skins">Bezaklar</span><b id="tabSkins">1/6</b></button>
+        </div>
+        <section class="card pane" data-pane="missions"><h2><span data-i18n="missions">Vazifalar</span></h2><div class="mlist" id="introMissions"></div></section>
+        <section class="card pane" data-pane="skins"><h2><span data-i18n="skins">Bezaklar</span><span class="acc" id="skinName"></span></h2><div class="skins" id="skins"></div></section>
       </div>
       <button class="btn breathe" id="startBtn" type="button" disabled>
         <span class="spin" aria-hidden="true"></span>
@@ -364,7 +425,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
         <div><span data-i18n="streak">Seriya</span><b id="statCombo">0</b></div>
         <div><span data-i18n="stars">Yulduz</span><b id="statStars">+0</b></div>
       </div>
-      <div class="card"><div id="overMissions"></div></div>
+      <div class="card"><div class="mlist" id="overMissions"></div></div>
       <div class="btn-row">
         <button class="btn ghost" id="menuBtn" type="button"><span data-i18n="menu">Menyu</span></button>
         <button class="btn" id="againBtn" type="button">
@@ -411,7 +472,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
       d1:"Uneven speed ahead!", d2:"Wind! Bricks may turn back", d3:"Precision gets tighter", d4:"Expert precision",
       pStar:"+1 ★", pShield:"Shield!", pSlow:"Slow-mo!", pWide:"Wider!", shieldUsed:"Shield saved you!", streakBonus:"Streak bonus +{n} ★",
       medals:["Bronze","Silver","Gold","Platinum","Diamond"], medalGot:"{m} medal", next:"Next: {m} · {n} m", allMedals:"All medals earned!",
-      skinNames:["Majolica","Samarkand","Bukhara","Khiva","Neon","Gilded"], unlocked:"{s} unlocked!", need:"{n} more ★ needed", slowN:"{n}"},
+      skinNames:["Majolica","Samarkand","Bukhara","Khiva","Neon","Gilded"], owned:"Owned", selected:"Selected", unlocked:"{s} unlocked!", need:"{n} more ★ needed", slowN:"{n}"},
     uz: {field:"Minora oʻyin maydoni", best:"Rekord", unit:"metr", cue:"Bosing — gʻishtni tushiring", tagline:"Gʻisht ustiga gʻisht",
       s1:"Bosing", s1d:"Gʻisht toʻxtab, pastga tushadi", s2:"Aniq tushiring", s2d:"Chetga chiqqan qismi kesiladi", s3:"Bonuslarni oling", s3d:"Yulduz, qalqon va boshqalar",
       play:"Boshlash", hintStart:"<kbd>Probel</kbd> yoki ekranning istalgan joyiga bosing", newBest:"★ Yangi rekord", perfect:"Aniq", streak:"Seriya", stars:"Yulduz",
@@ -425,7 +486,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
       d1:"Diqqat: tezlik notekis!", d2:"Shamol! Gʻisht orqaga burilishi mumkin", d3:"Aniqlik qiyinlashdi", d4:"Usta darajasidagi aniqlik",
       pStar:"+1 ★", pShield:"Qalqon!", pSlow:"Sekinlashuv!", pWide:"Kengaydi!", shieldUsed:"Qalqon saqlab qoldi!", streakBonus:"Seriya bonusi +{n} ★",
       medals:["Bronza","Kumush","Oltin","Platina","Olmos"], medalGot:"{m} medal", next:"Keyingi: {m} · {n} m", allMedals:"Barcha medallar olindi!",
-      skinNames:["Majolika","Samarqand","Buxoro","Xiva","Neon","Tilla"], unlocked:"{s} ochildi!", need:"Yana {n} ★ kerak", slowN:"{n}"},
+      skinNames:["Majolika","Samarqand","Buxoro","Xiva","Neon","Tilla"], owned:"Sizda", selected:"Tanlangan", unlocked:"{s} ochildi!", need:"Yana {n} ★ kerak", slowN:"{n}"},
   };
   let T = STR.uz;
   async function pickLang(){
@@ -823,37 +884,56 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
       }
     }
   }
+  const MICON = {
+    height:['<path d="M12 20V5M6 11l6-6 6 6"/>', "#55d3cb", "rgba(85,211,203,.15)"],
+    perfect:['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/>', "#f6d27a", "rgba(246,210,122,.14)"],
+    streak:['<path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/>', "#ffa36b", "rgba(255,163,107,.15)"],
+    stars:['<path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z" fill="currentColor" stroke="none"/>', "#f6d27a", "rgba(246,210,122,.14)"],
+    bricks:['<rect x="6" y="4" width="12" height="4" rx="1"/><rect x="4" y="10" width="16" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/>', "#8db0ff", "rgba(141,176,255,.15)"],
+    games:['<path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v5h5"/>', "#c9a2ff", "rgba(201,162,255,.15)"],
+  };
+  const svgI = (body, size) => '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + body + "</svg>";
   function renderMissions(el){
     el.innerHTML = "";
+    const fills = [];
     for (const m of S.missions) {
+      const [icon, c, cb] = MICON[m.t];
       const row = document.createElement("div");
       row.className = "mission" + (m.done ? " done" : "");
-      const mt = document.createElement("span"); mt.className = "mt"; mt.textContent = missionText(m);
-      const mp = document.createElement("span"); mp.className = "mp"; mp.textContent = Math.min(m.prog, m.n) + "/" + m.n;
-      if (!m.done) mt.appendChild(mp);
-      const mr = document.createElement("span"); mr.className = "mr"; mr.textContent = "+" + m.r + "★";
-      const bar = document.createElement("div"); bar.className = "bar";
-      const fill = document.createElement("i"); fill.style.width = (Math.min(1, m.prog/m.n)*100) + "%";
-      bar.appendChild(fill); row.append(mt, mr, bar); el.appendChild(row);
+      row.style.setProperty("--c", c); row.style.setProperty("--cb", cb);
+      row.innerHTML = '<span class="mi">' + svgI(m.done ? '<path d="M5 12.5l4.5 4.5L19 7"/>' : icon, 18) + '</span>'
+        + '<div class="mb"><div class="mt"></div><div class="bar"><i></i></div></div>'
+        + '<div class="ms"><span class="mr">+' + m.r + '★</span><span class="mp">' + Math.min(m.prog, m.n) + "/" + m.n + "</span></div>";
+      row.querySelector(".mt").textContent = missionText(m);
+      fills.push([row.querySelector(".bar i"), Math.min(1, m.prog/m.n)]);
+      el.appendChild(row);
     }
+    // grow the bars in after the rows are on screen
+    setTimeout(() => fills.forEach(([f, v]) => { f.style.width = (v*100) + "%"; }), 80);
+    const tm = $("tabMis");
+    if (tm) tm.textContent = S.missions.filter(m => m.done).length + "/" + S.missions.length;
   }
 
   // ---------- skins ----------
+  const ICON_LOCK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg>';
   function renderSkins(){
     const el = $("skins");
     el.innerHTML = "";
     SKINS.forEach((sk, i) => {
-      const owned = S.owned.includes(sk.id), b = document.createElement("button");
-      b.type = "button"; b.className = "skin" + (owned ? "" : " locked");
-      b.setAttribute("aria-pressed", String(S.skin === sk.id));
+      const owned = S.owned.includes(sk.id), sel = S.skin === sk.id, b = document.createElement("button");
+      b.type = "button";
+      b.className = "skin" + (owned ? "" : " locked") + (sel ? " sel" : "") + (!owned && S.stars >= sk.price ? " can" : "");
+      b.setAttribute("aria-pressed", String(sel));
       b.setAttribute("aria-label", T.skinNames[i] + (owned ? "" : ", " + sk.price + " ★"));
-      const t = sk.tiles;
-      b.style.setProperty("--sw", "linear-gradient(180deg," + t[0].f + " 0 33%," + t[1].f + " 33% 66%," + t[2].f + " 66% 100%)");
-      b.innerHTML = '<span class="sw"></span>' + (owned ? "" : '<span class="price' + (S.stars >= sk.price ? " can" : "") + '">' + sk.price + "★</span>");
+      const bricks = [sk.tiles[2], sk.tiles[1], sk.tiles[0]].map(t => '<i style="--f:' + t.f + ";--l:" + t.l + ";--d:" + t.d + ";--m:" + t.m + '"></i>').join("");
+      b.innerHTML = '<span class="pv">' + bricks + (owned ? "" : '<span class="lock">' + ICON_LOCK + "</span>") + "</span>"
+        + '<span class="nm"></span><span class="tag">' + (sel ? T.selected : owned ? T.owned : sk.price + " ★") + "</span>";
+      b.querySelector(".nm").textContent = T.skinNames[i];
       b.addEventListener("click", () => chooseSkin(sk, i, b));
       el.appendChild(b);
     });
     $("skinName").textContent = T.skinNames[SKINS.indexOf(SK)];
+    $("tabSkins").textContent = S.owned.length + "/" + SKINS.length;
   }
   function chooseSkin(sk, i, btn){
     ensureAudio();
@@ -870,6 +950,11 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
     S.skin = sk.id; SK = sk; patCache.clear();
     updateStars(true); renderSkins(); save();
   }
+  function setTab(tab){
+    $("hub").dataset.tab = tab;
+    document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+  }
+  document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
   function renderIntro(){
     stage.classList.toggle("newbie", S.best === 0 && S.stats.games === 0);
     renderMissions($("introMissions"));
@@ -1039,7 +1124,7 @@ kbd{font:800 11px/1 var(--font);padding:4px 7px;border-radius:6px;background:rgb
     if (state === "play" && cur) drop();
   }
   stage.addEventListener("pointerdown", e => {
-    if (e.target.closest("button, .card, .panel") || e.button > 0) return;
+    if (e.target.closest("button, .card, .panel, .hub") || e.button > 0) return;
     e.preventDefault(); act();
   });
   $("startBtn").addEventListener("click", () => { if (!loaded || paused) return; ensureAudio(); startGame(); });
